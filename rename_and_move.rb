@@ -16,7 +16,7 @@ Dir.glob("original/*.info.json").each do |file|
   end
 
   # ファイル名をタイトルにする
-  renamed_filename = "#{json['title'].gsub("/", "-")}.mp3"
+  renamed_filename = "#{json['title'].gsub("/", "_")}.mp3"
   dest_path = "#{TARGET_PATH}#{renamed_filename}"
   FileUtils.cp audio_filename, dest_path
 
