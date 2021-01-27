@@ -1,8 +1,8 @@
 require 'json'
 require 'pathname'
 require 'fileutils'
-TARGET_PATH = "~/app/radiko/public/mp3/"
-#TARGET_PATH = "./mp3/"
+#TARGET_PATH = "~/app/radiko/public/mp3/"
+TARGET_PATH = "./mp3/"
 
 Dir.glob("original/*.info.json").each do |file|
   json = JSON.parse(File.read(file))
