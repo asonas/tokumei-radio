@@ -1,8 +1,11 @@
 require 'json'
 require 'pathname'
 require 'fileutils'
-#TARGET_PATH = "~/app/radiko/public/mp3/"
-TARGET_PATH = "./mp3/"
+require 'shellwords'
+
+require 'pry'
+TARGET_PATH = "/home/asonas/app/radiko/public/mp3/"
+#TARGET_PATH = "./mp3/"
 
 Dir.glob("original/*.info.json").each do |file|
   json = JSON.parse(File.read(file))
@@ -12,13 +15,14 @@ Dir.glob("original/*.info.json").each do |file|
     gsub(original_title.extname, '.mp3')
 
   unless File.exists?(audio_filename)
-    raise "do not found: #{json['title']}"
+    puts audio_filename
+    raise "do not found: #{audio_filename}: #{json['title']}"
   end
 
   # ファイル名をタイトルにする
   renamed_filename = "#{json['title'].gsub("/", "_")}.mp3"
   dest_path = "#{TARGET_PATH}#{renamed_filename}"
-  FileUtils.cp audio_filename, dest_path
+  FileUtils.cp_r audio_filename, dest_path, remove_destination: true
 
   # 更新日を変更する
   upload_date = audio_filename.split("-")[0].split('/')[1]

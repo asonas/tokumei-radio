@@ -17,6 +17,6 @@ Dir.glob("original/*.info.json").each do |file|
 
   output_filename = filename.sub(filename.extname, '.mp3')
   unless File.exists? output_filename
-    system "ffmpeg -i #{filename.to_s} -vn -ac 2 -ar 44100 -ab 192k -acodec libmp3lame -f mp3 #{output_filename}"
+    system "/usr/local/ffmpeg_build/bin/ffmpeg -i #{filename.to_s} -vn -ac 2 -ar 44100 -ab 192k -acodec libmp3lame -f mp3 #{output_filename}"
   end
 end
